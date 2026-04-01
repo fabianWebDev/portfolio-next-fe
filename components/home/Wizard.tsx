@@ -4,11 +4,11 @@ import { TypeAnimation } from "react-type-animation";
 
 export default function Wizard() {
     return (
-        <section className="w-full justify-center items-center inline-block mx-auto rounded-md border border-gray-300 bg-white p-4 text-sm text-gray-900 shadow-sm dark:border-gray-700 dark:bg-neutral-900 dark:text-gray-100">
+        <section className="w-full justify-center items-center inline-block mx-auto rounded-md border border-teal-400 bg-white p-4 text-sm text-gray-900 shadow-sm dark:border-teal-400 dark:bg-neutral-900 dark:text-gray-100">
             <div className="flex items-baseline gap-2">
                 <TypeAnimation
                     wrapper="h2"
-                    className="inline text-2xl font-semibold tracking-tight"
+                    className="inline text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100"
                     sequence={["Wizard", 2000, "Mago", 2000, "まほうつかい", 2000, "Sorcier", 2000]}
                     speed={50}
                     repeat={Infinity}
@@ -32,7 +32,7 @@ export default function Wizard() {
                     <span className="w-5 text-right text-gray-500 dark:text-gray-400">1</span>
                     <div>
                         <span>: one skilled in magic :</span>{" "}
-                        <span className="font-semibold text-blue-700 dark:text-blue-400">
+                        <span className="font-semibold text-blue-600 dark:text-blue-400">
                             SORCERER
                         </span>
                     </div>
@@ -53,7 +53,7 @@ export default function Wizard() {
                             archaic
                         </span>
                         <span>: a wise man :</span>{" "}
-                        <span className="font-semibold text-blue-700 dark:text-blue-400">
+                        <span className="font-semibold text-blue-600 dark:text-blue-400">
                             SAGE
                         </span>
                     </div>

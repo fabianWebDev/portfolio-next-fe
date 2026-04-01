@@ -5,22 +5,70 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --highlight: #6366f1;
 }
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --highlight: #8b5cf6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --color-highlight: var(--highlight);
+}
+
+html {
+  font-family: var(--font-sans);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 768px) {
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #444, #888);
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Tall screenshot: translateY needs real thumb height — cqh in @keyframes is unreliable */
+@keyframes pan-y-scroll {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(min(0px, calc(-100% + var(--thumb-h, 11rem))));
+  }
+}
+
+.animate-pan-y-scroll {
+  animation: pan-y-scroll 10s ease-in-out infinite alternate;
 }

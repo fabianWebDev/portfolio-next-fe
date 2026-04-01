@@ -5,19 +5,26 @@ export default async function ProjectsPage() {
     const data = await res.json();
 
     return (
-        <main className="flex min-h-screen flex-col gap-10">
-            <h1>Projects</h1>
-            {data.map((project: any) => {
-                return (
-                    <ProjectCard
-                        key={project.id}
-                        id={project.id}
-                        name={project.name}
-                        short_description={project.short_description}
-                        technologies={project.tech_list}
-                    />
-                )
-            })}
+        <main className="flex min-h-0 flex-1 flex-col gap-4">
+            <h1 className="shrink-0 text-3xl font-semibold text-gray-900 dark:text-gray-100">
+                Projects
+            </h1>
+            <div className="min-h-0 flex-1 overflow-y-auto">
+                <div className="grid grid-cols-1 gap-4 pb-2 md:pr-2 lg:pr-4">
+                    {data.map((project: any) => {
+                        return (
+                            <ProjectCard
+                                key={project.id}
+                                id={project.id}
+                                name={project.name}
+                                image={project.image}
+                                short_description={project.short_description}
+                                technologies={project.tech_list}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
         </main>
     );
 }

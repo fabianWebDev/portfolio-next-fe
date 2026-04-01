@@ -1,8 +1,8 @@
 export default function MissionStatement() {
     return (
-        <div> 
-            <h2>My Mission</h2>
-            <p>My mission is to help people learn how to code and build their own projects.</p>
-        </div>
+        <section className="mt-6">  
+            <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-100">My Mission</h2>
+            <p className="text-gray-700 dark:text-gray-300">Transform ideas and problems into simple, efficient, and elegant solutions.</p>
+        </section>
     );
 }

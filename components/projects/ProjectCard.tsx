@@ -34,7 +34,7 @@ export default function ProjectCard({
 
     return (
         <article className="flex flex-col gap-4 rounded border border-gray-200 bg-gray-50 p-4 dark:border-neutral-700 dark:bg-neutral-900/50 md:p-5">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-4">
                 <div
                     ref={thumbRef}
                     className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-sm bg-gray-200 dark:bg-neutral-800 sm:aspect-auto sm:h-44 sm:w-[30%] sm:min-h-[11rem]"
@@ -58,32 +58,34 @@ export default function ProjectCard({
                         style={{ width: "100%", height: "auto" }}
                     />
                 </div>
-                <div className="min-w-0 flex justify-between flex-col">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-                        {name}
-                    </h2>
-                    <ul className="flex flex-wrap gap-2 mt-2">
-                        {technologies.map((technology) => (
-                            <li key={technology}>
-                                <span className="inline-block rounded-full bg-gray-200 px-3 py-1 text-sm text-gray-800 dark:bg-neutral-700 dark:text-gray-200">
-                                    {technology}
-                                </span>
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="mt-2 text-gray-600 dark:text-gray-400">
-                        {short_description}
-                    </p>
-                    <div className="flex pt-1">
+                <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-between gap-2">
+                    <div className="flex min-w-0 flex-col">
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                            {name}
+                        </h2>
+                        <ul className="flex flex-wrap gap-2 mt-2">
+                            {technologies.map((technology) => (
+                                <li key={technology}>
+                                    <span className="inline-block rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-800 dark:bg-neutral-700 dark:text-gray-200">
+                                        {technology}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                        <p className="mt-2 text-gray-600 dark:text-gray-400">
+                            {short_description}
+                        </p>
+
+                    </div>
+                    <div className="flex shrink-0">
                         <Link
                             href={`/projects/${id}`}
-                            className="inline-flex items-center justify-center border-2 rounded-md border-gray-900 bg-white px-6 py-2 text-sm font-medium text-gray-900 transition-colors dark:border-teal-400 dark:bg-teal-400 dark:text-gray-900"
+                            className="border-2 rounded-lg border-teal-500 px-6 py-2 text-md text-teal-400 transition-colors font-semibold dark:border-teal-400 hover:bg-teal-400 hover:text-white dark:hover:bg-teal-400 dark:hover:text-black"
                         >
-                            See project
+                            View project
                         </Link>
                     </div>
                 </div>
-
             </div>
         </article>
     );

@@ -4,11 +4,11 @@ import { TypeAnimation } from "react-type-animation";
 
 export default function Wizard() {
     return (
-        <section className="w-full justify-center items-center inline-block mx-auto rounded-md border border-teal-400 bg-white p-4 text-sm text-gray-900 shadow-sm dark:border-teal-400 dark:bg-neutral-900 dark:text-gray-100">
+        <section className="w-full mt-6 justify-center items-center inline-block mx-auto rounded-md border border-teal-400 bg-white p-4 text-sm text-gray-900 shadow-sm dark:border-teal-400 dark:bg-neutral-900 dark:text-gray-100">
             <div className="flex items-baseline gap-2">
                 <TypeAnimation
                     wrapper="h2"
-                    className="inline text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100"
+                    className="inline text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100"
                     sequence={["Wizard", 2000, "Mago", 2000, "まほうつかい", 2000, "Sorcier", 2000]}
                     speed={50}
                     repeat={Infinity}

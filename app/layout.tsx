@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import Navbar from "@/components/Navbar";
-import SideBar from "@/components/layout/SideBar";
 import MainSection from "@/components/layout/MainSection";
 
 const inter = Inter({
@@ -26,11 +25,11 @@ export default function RootLayout({
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
         <Providers>
-          <Navbar />
-          <div className="grid h-[calc(100vh-3.5rem)] min-h-0 grid-cols-12 pt-14">
-            <SideBar />
-            <MainSection>{children}</MainSection>
-          </div>
+
+          <MainSection>
+            <Navbar />
+            {children}
+          </MainSection>
         </Providers>
       </body>
     </html>

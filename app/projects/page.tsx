@@ -5,12 +5,12 @@ export default async function ProjectsPage() {
     const data = await res.json();
 
     return (
-        <main className="flex min-h-0 flex-1 flex-col gap-4">
-            <h1 className="shrink-0 text-3xl font-semibold text-gray-900 dark:text-gray-100">
+        <main className="flex min-h-0 flex-1 flex-col gap-4 w-full">
+            <h1 className="shrink-0 text-4xl font-semibold text-gray-900 dark:text-gray-100">
                 Projects
             </h1>
-            <div className="min-h-0 flex-1 overflow-y-auto">
-                <div className="grid grid-cols-1 gap-4 pb-2 md:pr-2 lg:pr-4">
+            <div className="min-h-0 flex-1 overflow-y-auto w-full">
+                <div className="grid grid-cols-1 gap-4 pb-2 md:pr-2 lg:pr-4 md:grid-cols-2">
                     {data.map((project: any) => {
                         return (
                             <ProjectCard

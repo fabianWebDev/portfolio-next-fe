@@ -27,10 +27,13 @@ export default function Navbar() {
     const linkClass =
         "rounded-md px-3 py-2 text-lg font-bold text-gray-900 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-gray-400 dark:text-gray-100 dark:hover:bg-neutral-800 dark:focus-visible:ring-gray-500";
 
+    const desktopLinkClass =
+        "rounded-md px-3 py-2 text-lg text-gray-900 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-gray-400 dark:text-gray-100 dark:hover:bg-neutral-800 dark:focus-visible:ring-gray-500";
+
     return (
         <>
-            <header className="fixed top-0 left-0 right-0 z-50 flex h-14 items-center justify-between gap-4 border-b border-gray-200 bg-white px-4 dark:border-gray-800 dark:bg-neutral-950">
-                <div className="flex min-w-0 flex-1 items-center gap-3">
+            <header className="flex items-center justify-between gap-6 border-b border-teal-400 bg-white py-2 dark:border-teal-400 dark:bg-background mb-6">
+                <div className="flex min-w-0 flex-1 items-center gap-3 md:gap-6">
                     <button
                         type="button"
                         className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-gray-900 outline-none hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-gray-400 md:hidden dark:text-gray-100 dark:hover:bg-neutral-800"
@@ -77,6 +80,20 @@ export default function Navbar() {
                     >
                         WizOfCode
                     </Link>
+                    <nav
+                        className="hidden min-w-0 flex-1 items-center justify-center md:flex"
+                        aria-label="Main"
+                    >
+                        <ul className="flex flex-wrap items-center justify-center gap-1">
+                            {navLinks.map(({ href, label }) => (
+                                <li key={href}>
+                                    <Link href={href} className={desktopLinkClass}>
+                                        {label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
                 </div>
                 <ThemeToggle />
             </header>

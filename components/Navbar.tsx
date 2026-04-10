@@ -32,7 +32,7 @@ export default function Navbar() {
 
     return (
         <>
-            <header className="flex items-center justify-between gap-6 border-b border-teal-400 bg-white py-2 dark:border-teal-400 dark:bg-background mb-6">
+            <header className="flex items-center justify-between gap-6 border-b border-gray-200 bg-white py-2 dark:border-gray-800 dark:bg-background mb-6">
                 <div className="flex min-w-0 flex-1 items-center gap-3 md:gap-6">
                     <button
                         type="button"

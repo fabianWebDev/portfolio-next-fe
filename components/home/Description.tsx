@@ -1,6 +1,10 @@
-import Link from "next/link";
+"use client";
+
+import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 
 export default function Description() {
+    const router = useRouter();
     return (
         <section className="mt-6">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">About Me</h2>
@@ -14,7 +18,9 @@ export default function Description() {
                     I turn ideas into clean, scalable, and user-focused digital products.
                 </p>
             </div>
-            <Link className="bg-teal-400 text-gray-200 font-semibold dark:text-gray-900 rounded-md p-2 mt-2 inline-block" href="/projects">View Projects</Link>
+            <div className="mt-2">
+                <Button onClick={() => router.push("/projects")}>View Projects</Button>
+            </div>
         </section>
     );
 }

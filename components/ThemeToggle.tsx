@@ -30,9 +30,9 @@ export default function ThemeToggle() {
             aria-label={
                 mounted
                     ? isDark
-                        ? "Cambiar a tema claro"
-                        : "Cambiar a tema oscuro"
-                    : "Cambiar tema"
+                        ? "Switch to light mode"
+                        : "Switch to dark mode"
+                    : "Switch theme"
             }
             aria-pressed={mounted ? isDark : undefined}
         >

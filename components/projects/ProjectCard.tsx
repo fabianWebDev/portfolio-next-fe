@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
-
+import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 type ProjectCardProps = {
     id: number;
     name: string;
@@ -21,7 +21,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
     const thumbRef = useRef<HTMLDivElement>(null);
     const [thumbH, setThumbH] = useState(0);
-
+    const router = useRouter();
     useLayoutEffect(() => {
         const el = thumbRef.current;
         if (!el) return;
@@ -33,7 +33,7 @@ export default function ProjectCard({
     }, []);
 
     return (
-        <article className="flex flex-col gap-4 rounded border border-gray-200 bg-gray-50 p-4 dark:border-neutral-700 dark:bg-neutral-900/50 md:p-5">
+        <article className="flex flex-col gap-4 rounded border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-neutral-900 md:p-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-4">
                 <div
                     ref={thumbRef}
@@ -75,15 +75,14 @@ export default function ProjectCard({
                         <p className="mt-2 text-gray-600 dark:text-gray-400">
                             {short_description}
                         </p>
-
                     </div>
                     <div className="flex shrink-0">
-                        <Link
-                            href={`/projects/${id}`}
-                            className="border-2 rounded-lg border-teal-500 px-6 py-2 text-md text-teal-400 transition-colors font-semibold dark:border-teal-400 hover:bg-teal-400 hover:text-white dark:hover:bg-teal-400 dark:hover:text-black"
+                        <Button
+                            onClick={() => router.push(`/projects/${id}`)}
+                            variant="outline"
                         >
                             View project
-                        </Link>
+                        </Button>
                     </div>
                 </div>
             </div>

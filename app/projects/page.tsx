@@ -2,7 +2,7 @@ import ProjectCard from "@/components/projects/ProjectCard";
 
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ??
-    "http://127.0.0.1:8000/api";
+    "https://portfolio-be-twdt.onrender.com/api";
 
 async function fetchProjects() {
     const url = `${API_BASE.replace(/\/$/, "")}/projects/`;

@@ -1,300 +1,143 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Button from "@/components/Button";
+import ZoomableLightbox from "@/components/projects/ZoomableLightbox";
 import { useRouter, useParams } from "next/navigation";
 
 type ProjectDetail = {
-    name: string;
+    title: string;
     image: string;
     short_description: string;
-    description?: string;
+    full_description?: string;
     tech_list: string[];
-    link: string;
+    project_url: string;
     github_url: string | null;
+    project_type: string;
+    
 };
 
-const MIN_ZOOM = 1;
-const MAX_ZOOM = 5;
-
-function ZoomableLightbox({
-    open,
-    onClose,
-    src,
-    alt,
-}: {
-    open: boolean;
-    onClose: () => void;
-    src: string;
-    alt: string;
-}) {
-    const [zoom, setZoom] = useState(1);
-    const [pan, setPan] = useState({ x: 0, y: 0 });
-    const [isDragging, setIsDragging] = useState(false);
-    const dragging = useRef(false);
-    const lastPointer = useRef({ x: 0, y: 0 });
-    const viewportRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!open) {
-            setZoom(1);
-            setPan({ x: 0, y: 0 });
-        }
-    }, [open]);
-
-    useEffect(() => {
-        if (!open) return;
-        const onKey = (e: KeyboardEvent) => {
-            if (e.key === "Escape") onClose();
-            else if (e.key === "+" || e.key === "=") {
-                e.preventDefault();
-                setZoom((z) => Math.min(MAX_ZOOM, z * 1.2));
-            } else if (e.key === "-" || e.key === "_") {
-                e.preventDefault();
-                setZoom((z) => {
-                    const nz = Math.max(MIN_ZOOM, z / 1.2);
-                    if (nz === 1) setPan({ x: 0, y: 0 });
-                    return nz;
-                });
-            } else if (e.key === "0") {
-                setZoom(1);
-                setPan({ x: 0, y: 0 });
-            }
-        };
-        document.addEventListener("keydown", onKey);
-        const prevOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.removeEventListener("keydown", onKey);
-            document.body.style.overflow = prevOverflow;
-        };
-    }, [open, onClose]);
-
-    useEffect(() => {
-        const el = viewportRef.current;
-        if (!el || !open) return;
-        const onWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            const factor = e.deltaY < 0 ? 1.1 : 1 / 1.1;
-            setZoom((z) => {
-                const nz = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z * factor));
-                if (nz === 1) setPan({ x: 0, y: 0 });
-                return nz;
-            });
-        };
-        el.addEventListener("wheel", onWheel, { passive: false });
-        return () => el.removeEventListener("wheel", onWheel);
-    }, [open]);
-
-    const zoomIn = () =>
-        setZoom((z) => Math.min(MAX_ZOOM, z * 1.25));
-    const zoomOut = () =>
-        setZoom((z) => {
-            const nz = Math.max(MIN_ZOOM, z / 1.25);
-            if (nz === 1) setPan({ x: 0, y: 0 });
-            return nz;
-        });
-    const resetView = () => {
-        setZoom(1);
-        setPan({ x: 0, y: 0 });
-    };
-
-    const onPointerDown = (e: React.PointerEvent) => {
-        if (zoom <= 1) return;
-        e.currentTarget.setPointerCapture(e.pointerId);
-        dragging.current = true;
-        setIsDragging(true);
-        lastPointer.current = { x: e.clientX, y: e.clientY };
-    };
-
-    const onPointerMove = (e: React.PointerEvent) => {
-        if (!dragging.current) return;
-        const dx = e.clientX - lastPointer.current.x;
-        const dy = e.clientY - lastPointer.current.y;
-        lastPointer.current = { x: e.clientX, y: e.clientY };
-        setPan((p) => ({ x: p.x + dx, y: p.y + dy }));
-    };
-
-    const endDrag = (e: React.PointerEvent) => {
-        if (!dragging.current) return;
-        dragging.current = false;
-        setIsDragging(false);
-        try {
-            e.currentTarget.releasePointerCapture(e.pointerId);
-        } catch {
-            /* already released */
-        }
-    };
-
-    if (!open) return null;
-
-    const zoomPercent = Math.round(zoom * 100);
-
-    return (
-        <div
-            className="fixed inset-0 z-50 flex flex-col bg-black/90"
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Full image: ${alt}`}
-            onClick={onClose}
-        >
-            <div
-                className="flex shrink-0 flex-wrap items-center justify-between gap-2 px-3 py-3"
-                onClick={(e) => e.stopPropagation()}
-            >
-                <button
-                    type="button"
-                    className="rounded-full bg-white/15 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/25"
-                    onClick={onClose}
-                >
-                    Close
-                </button>
-                <div
-                    className="flex flex-wrap items-center justify-end gap-2"
-                    role="group"
-                    aria-label="Zoom controls"
-                >
-                    <button
-                        type="button"
-                        className="rounded-full bg-white/15 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/25 disabled:opacity-40"
-                        onClick={zoomOut}
-                        disabled={zoom <= MIN_ZOOM}
-                        aria-label="Zoom out"
-                    >
-                        −
-                    </button>
-                    <span className="min-w-[3.25rem] text-center text-sm tabular-nums text-white">
-                        {zoomPercent}%
-                    </span>
-                    <button
-                        type="button"
-                        className="rounded-full bg-white/15 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/25 disabled:opacity-40"
-                        onClick={zoomIn}
-                        disabled={zoom >= MAX_ZOOM}
-                        aria-label="Zoom in"
-                    >
-                        +
-                    </button>
-                    <button
-                        type="button"
-                        className="rounded-full bg-white/15 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/25"
-                        onClick={resetView}
-                        aria-label="Reset zoom and position"
-                    >
-                        Reset
-                    </button>
-                </div>
-            </div>
-
-            <div
-                ref={viewportRef}
-                className="relative min-h-0 flex-1 touch-none overflow-hidden"
-                onClick={onClose}
-            >
-                <div className="flex h-full w-full items-center justify-center p-4">
-                    <div
-                        className={`select-none ${zoom > 1 ? (isDragging ? "cursor-grabbing" : "cursor-grab") : "cursor-zoom-in"}`}
-                        style={{
-                            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-                            transition: isDragging
-                                ? "none"
-                                : "transform 0.12s ease-out",
-                            transformOrigin: "center center",
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                        onPointerDown={onPointerDown}
-                        onPointerMove={onPointerMove}
-                        onPointerUp={endDrag}
-                        onPointerCancel={endDrag}
-                    >
-                        {/* eslint-disable-next-line @next/next/no-img-element -- lightbox uses native img for zoom/pan */}
-                        <img
-                            src={src}
-                            alt={alt}
-                            className="max-h-[min(85vh,85dvh)] max-w-[min(100vw-2rem,100%)] object-contain pointer-events-none"
-                            draggable={false}
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <p className="pointer-events-none shrink-0 px-3 pb-3 text-center text-xs text-white/70">
-                Scroll to zoom · Drag when zoomed · + / − / 0 keys
-            </p>
-        </div>
-    );
+/** First block separated by a blank line; otherwise the whole trimmed string. */
+function getFirstParagraph(text: string): string {
+    const t = text.trim();
+    if (!t) return "";
+    const parts = t.split(/\n\s*\n/);
+    return (parts[0] ?? "").trim();
 }
 
 export default function ProjectPage() {
     const { id } = useParams<{ id: string }>();
     const [data, setData] = useState<ProjectDetail | null>(null);
     const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [descriptionExpanded, setDescriptionExpanded] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
         if (!id) return;
-        fetch(`https://portfolio-be-twdt.onrender.com/api/projects/${id}`)
+        fetch(`http://127.0.0.1:8000/api/projects/${id}`)
             .then((res) => res.json())
             .then(setData);
     }, [id]);
 
     if (!data) {
         return (
-            <main className="flex min-h-0 w-full flex-1 flex-col items-center justify-center gap-4 py-16">
+            <>
                 <p className="text-gray-600 dark:text-gray-400">Loading project…</p>
-            </main>
+            </>
         );
     }
 
-    const bodyText = data.description?.trim() || data.short_description;
+    const fullDescription = data.full_description?.trim() ?? "";
+    const shortDescription = data.short_description?.trim() ?? "";
+    const firstParagraphOfFull = getFirstParagraph(fullDescription);
+    const hasExpandableDescription =
+        fullDescription.length > 0 &&
+        fullDescription !== firstParagraphOfFull;
+
+    const browserBarHost = (() => {
+        try {
+            return new URL(data.project_url).hostname.replace(/^www\./, "");
+        } catch {
+            return data.project_url;
+        }
+    })();
 
     return (
-        <main className="flex min-h-0 w-full flex-1 flex-col gap-8">
-            <div className="grid min-h-0 flex-1 grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
-                <div className="flex min-w-0 flex-col gap-6">
-                    <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 md:text-4xl">
-                        {data.name}
+        <>
+            <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-start">
+                <div className="flex min-w-0 flex-col">
+                    {data.project_type && (
+                        <div className="flex items-center mb-1">
+                            <span className="rounded-full bg-blue-500/50 text-blue-300 text-xs px-2 py-1">
+                                <span className="w-2 h-2 rounded-full bg-blue-300 inline-block mr-2">
+                                </span>
+                                {data.project_type}
+                            </span>
+                        </div>
+                    )}
+                    <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 md:text-4xl mt-1 mb-1">
+                        {data.title}
                     </h1>
 
-                    <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-gray-700 dark:border-gray-800 dark:bg-neutral-900 dark:text-gray-300 md:p-5">
-                        <p className="whitespace-pre-wrap leading-relaxed">
-                            {bodyText}
-                        </p>
+                    <div className="rounded-lg bg-background text-gray-700 dark:border-gray-800 dark:bg-background dark:text-gray-100">
+                        {hasExpandableDescription ? (
+                            <div className="flex flex-col ">
+                                <div
+                                    id="project-description"
+                                    className="text-md leading-relaxed text-gray-700 dark:text-gray-300"
+                                >
+                                    <p className="whitespace-pre-wrap">
+                                        {descriptionExpanded
+                                            ? fullDescription
+                                            : firstParagraphOfFull}
+                                    </p>
+                                </div>
+                                <div className="shrink-0">
+                                    <Button
+                                        onClick={() =>
+                                            setDescriptionExpanded((open) => !open)
+                                        }
+                                        variant="text"
+                                        aria-expanded={descriptionExpanded}
+                                        aria-controls="project-description"
+                                    >
+                                        {descriptionExpanded ? "Read less" : "Read more"}
+                                    </Button>
+                                </div>
+                            </div>
+                        ) : (
+                            <p className="whitespace-pre-wrap leading-relaxed">
+                                {fullDescription || shortDescription}
+                            </p>
+                        )}
                     </div>
 
                     <div>
-                        <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
-                            Technologies Used:
-                        </h2>
-                        <ul className="mt-3 flex flex-wrap gap-2">
+                        <ul className="mt-2 flex flex-wrap gap-2">
                             {data.tech_list.map((technology) => (
                                 <li key={technology}>
-                                    <span className="inline-block rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-800 dark:bg-neutral-700 dark:text-gray-200">
+                                    <span className="inline-block rounded-full bg-neutral-200 px-3 py-1 text-xs text-neutral-800 dark:bg-neutral-700 dark:text-neutral-300">
                                         {technology}
                                     </span>
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
-                            Links:
-                        </h2>
-                        {data.github_url ? (
-                            <a
-                                href={data.github_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex h-11 max-w-[5.5rem] items-center justify-center rounded-full border border-gray-300 bg-gray-100 px-5 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-200 dark:border-neutral-600 dark:bg-neutral-800 dark:text-gray-100 dark:hover:bg-neutral-700"
-                            >
-                                GitHub
-                            </a>
-                        ) : null}
-                        <div className="shrink-0">
+                    <div className="flex flex-col gap-2 mt-3">
+                        <div className="flex flex-wrap gap-2 shrink-0">
+                            {data.github_url ? (
+                                <Button
+                                    onClick={() => router.push(data.github_url || "")}
+                                    variant="outline"
+                                >
+                                    GitHub
+                                </Button>
+                            ) : null}
+
                             <Button
-                                onClick={() => router.push(data.link)}
-                                variant="outline"
+                                onClick={() => router.push(data.project_url)}
+                                variant="ghost"
                             >
                                 View website
                             </Button>
@@ -304,20 +147,53 @@ export default function ProjectPage() {
                 <button
                     type="button"
                     onClick={() => setLightboxOpen(true)}
-                    className="group relative aspect-[4/5] w-full cursor-zoom-in overflow-hidden rounded-lg border border-gray-200 text-left outline-none ring-offset-2 transition hover:opacity-[0.98] focus-visible:ring-2 focus-visible:ring-gray-400 dark:border-gray-800 dark:bg-neutral-800 dark:focus-visible:ring-neutral-500 lg:sticky lg:top-4 lg:aspect-auto lg:min-h-[min(70vh,560px)]"
-                    aria-label={`See full image: ${data.name}`}
+                    className="rounded-2xl overflow-hidden"
+                    aria-label={`See full image: ${data.title}`}
                 >
-                    <Image
-                        src={data.image}
-                        alt=""
-                        fill
-                        className="object-cover dark:border-neutral-700"
-                        sizes="(min-width: 1024px) 50vw, 100vw"
-                        priority
-                    />
-                    <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent px-3 py-3 text-center text-sm font-medium text-white md:py-4">
-                        See full image
-                    </span>
+                    <div
+                        className="flex shrink-0 items-center gap-2 px-3 py-2.5 bg-neutral-800/90"
+                        aria-hidden
+                    >
+                        <div className="flex gap-1.5" role="presentation">
+                            <span className="size-2.5 rounded-full bg-[#ff5f57]" />
+                            <span className="size-2.5 rounded-full bg-[#febc2e]" />
+                            <span className="size-2.5 rounded-full bg-[#28c840]" />
+                        </div>
+
+                        <div className="flex min-w-0 flex-1 items-center gap-2 rounded-md border border-gray-200/90 bg-white px-2.5 py-1 text-[11px] text-gray-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] dark:border-neutral-600 dark:bg-neutral-900/80 dark:text-neutral-400">
+                            <svg
+                                className="size-3 shrink-0 text-gray-400 dark:text-neutral-500"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden
+                            >
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                            </svg>
+                            <span className="truncate tabular-nums">
+                                https://{browserBarHost}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="relative aspect-[4/5] w-full lg:aspect-auto lg:min-h-[min(calc(70vh-3rem),520px)]">
+                        <Image
+                            src={data.image}
+                            alt=""
+                            fill
+                            className="object-cover object-top"
+                            sizes="(min-width: 1024px) 50vw, 100vw"
+                            priority
+                        />
+
+                        <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent px-3 py-3 text-center text-sm font-medium text-white md:py-4">
+                            See full image
+                        </span>
+                    </div>
                 </button>
             </div>
 
@@ -325,8 +201,8 @@ export default function ProjectPage() {
                 open={lightboxOpen}
                 onClose={() => setLightboxOpen(false)}
                 src={data.image}
-                alt={data.name}
+                alt={data.title}
             />
-        </main>
+        </>
     );
 }

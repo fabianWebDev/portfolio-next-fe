@@ -1,33 +1,61 @@
 import ProjectCard from "@/components/projects/ProjectCard";
 
+const API_BASE =
+    process.env.NEXT_PUBLIC_API_BASE_URL ??
+    "http://127.0.0.1:8000/api";
+
+async function fetchProjects() {
+    const url = `${API_BASE.replace(/\/$/, "")}/projects/`;
+    const res = await fetch(url, { next: { revalidate: 60 } });
+    const contentType = res.headers.get("content-type") ?? "";
+    if (!res.ok || !contentType.includes("application/json")) {
+        return null;
+    }
+    try {
+        const data = await res.json();
+        return Array.isArray(data) ? data : null;
+    } catch {
+        return null;
+    }
+}
+
 export default async function ProjectsPage() {
-    const res = await fetch("https://portfolio-be-twdt.onrender.com/api/projects/");
-    const data = await res.json();
+    const data = await fetchProjects();
 
     return (
         <>
-            <h1 className="shrink-0 mb-6 text-4xl font-semibold text-gray-900 dark:text-gray-100">
+            <h1 className="font-[family-name:var(--font-sekuya)] shrink-0 mb-8 mt-8 text-4xl font-semibold text-gray-900 dark:text-teal-500/90 text-center">
                 Projects
             </h1>
-            <main className="flex min-h-0 flex-1 flex-col gap-4 w-full">
-
-                <div className="min-h-0 flex-1 overflow-y-auto w-full">
-                    <div className="grid grid-cols-1 gap-4 pb-2 md:pr-2 lg:pr-4 md:grid-cols-2">
-                        {data.map((project: any) => {
+            {data === null ? (
+                <p className="text-gray-600 dark:text-gray-400">
+                    Projects could not be loaded right now. The API may be
+                    unavailable or returning an error.
+                </p>
+            ) : data.length === 0 ? (
+                <p className="text-gray-600 dark:text-gray-400">
+                    No projects to show yet.
+                </p>
+            ) : (
+                <div className="grid grid-cols-1 gap-4 pb-2 md:pr-2 lg:pr-4 md:grid-cols-2">
+                    {data.map((project: any) => {
+                        if (project.is_active) {
                             return (
                                 <ProjectCard
                                     key={project.id}
                                     id={project.id}
-                                    name={project.name}
+                                    name={project.title}
                                     image={project.image}
                                     short_description={project.short_description}
                                     technologies={project.tech_list}
+                                    project_type={project.project_type}
                                 />
                             );
-                        })}
-                    </div>
+                        }
+                        return null;
+                    })}
                 </div>
-            </main>
+            )}
         </>
     );
 }

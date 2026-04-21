@@ -32,7 +32,7 @@ export default function Navbar() {
 
     return (
         <>
-            <header className="flex items-center justify-between gap-6 border-b border-gray-200 bg-white py-2 dark:border-gray-800 dark:bg-background mb-6">
+            <header className="flex items-center justify-between gap-6 border-b-2 border-gray-200 bg-white py-2 dark:border-purple-600 dark:bg-transparent mb-6">
                 <div className="flex min-w-0 flex-1 items-center gap-3 md:gap-6">
                     <button
                         type="button"
@@ -74,12 +74,12 @@ export default function Navbar() {
                             </svg>
                         )}
                     </button>
-                    <Link
+                    {/* <Link
                         href="/"
-                        className="truncate text-lg font-bold tracking-tight text-gray-900 dark:text-gray-100"
+                        className="truncate text-lg font-bold tracking-tight text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-widest"
                     >
                         WizOfCode
-                    </Link>
+                    </Link> */}
                     <nav
                         className="hidden min-w-0 flex-1 items-center justify-center md:flex"
                         aria-label="Main"
@@ -95,7 +95,7 @@ export default function Navbar() {
                         </ul>
                     </nav>
                 </div>
-                <ThemeToggle />
+                {/* <ThemeToggle /> */}
             </header>
 
             {open && (

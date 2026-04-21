@@ -4,11 +4,11 @@ import Wizard from "@/components/home/Wizard";
 
 export default function Home() {
   return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto w-full">
-      <h1 className="text-4xl font-semibold text-gray-900 dark:text-gray-100">WizOfCode</h1>
+    <>
+      <h1 className="text-4xl md:text-5xl mt-8 mb-8 font-semibold text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-wider text-center">WizOfCode</h1>
       <Wizard />
       <Description />
       <MissionStatement />
-    </div>
+    </>
   );
 }

@@ -10,6 +10,7 @@ type ProjectCardProps = {
     image: string;
     short_description: string;
     technologies: string[];
+    project_type: string;
 };
 
 export default function ProjectCard({
@@ -18,6 +19,7 @@ export default function ProjectCard({
     image,
     short_description,
     technologies,
+    project_type,
 }: ProjectCardProps) {
     const thumbRef = useRef<HTMLDivElement>(null);
     const [thumbH, setThumbH] = useState(0);
@@ -33,7 +35,7 @@ export default function ProjectCard({
     }, []);
 
     return (
-        <article className="flex flex-col gap-4 rounded border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-neutral-900 md:p-5">
+        <article className="flex flex-col gap-4 rounded border-2 border-gray-200 bg-gray-50 p-4 dark:border-purple-600 dark:bg-transparent md:p-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch sm:gap-4">
                 <div
                     ref={thumbRef}
@@ -60,6 +62,15 @@ export default function ProjectCard({
                 </div>
                 <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-between gap-2">
                     <div className="flex min-w-0 flex-col">
+                        {project_type && (
+                            <div className="flex items-center mb-1">
+                                <span className="rounded-full bg-blue-500/50 text-blue-300 text-xs px-2 py-1">
+                                    <span className="w-2 h-2 rounded-full bg-blue-300 inline-block mr-2">
+                                    </span>
+                                    {project_type}
+                                </span>
+                            </div>
+                        )}
                         <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                             {name}
                         </h2>

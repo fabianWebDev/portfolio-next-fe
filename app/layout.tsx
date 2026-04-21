@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Sekuya } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import Navbar from "@/components/Navbar";
-import MainSection from "@/components/layout/MainSection";
+import Container from "@/components/layout/Container";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const sekuya = Sekuya({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sekuya",
+  weight: "400",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -22,14 +30,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${sekuya.variable}`}
+      suppressHydrationWarning
+    >
       <body className="antialiased" suppressHydrationWarning>
         <Providers>
-
-          <MainSection>
+          <Container>
             <Navbar />
-            {children}
-          </MainSection>
+            <main>{children}</main>
+          </Container>
         </Providers>
       </body>
     </html>

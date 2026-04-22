@@ -103,12 +103,12 @@ export default function Navbar() {
 
             <div
                 id="mobile-navigation"
-                className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-200 ease-out ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                     }`}
             >
-                <div className="mt-4">
-                    <div className="border-b border-t border-teal-500/20 bg-white dark:border-teal-500/20 dark:bg-transparent">
-                        <div className="flex flex-col divide-y divide-gray-100 dark:divide-teal-500/20">
+                <div className="">
+                    <div className="border-b-2 border-teal-500/20 bg-white dark:border-purple-500 dark:bg-transparent">
+                        <div className="flex flex-col divide-y dark:divide-purple-500">
                             {navLinks.map(({ href, label }) => {
                                 const active = isLinkActive(href);
 
@@ -117,15 +117,15 @@ export default function Navbar() {
                                         key={href}
                                         href={href}
                                         onClick={() => setOpen(false)}
-                                        className={`flex items-center justify-between px-4 py-3 text-sm tracking-wide transition-colors ${active
-                                                ? "text-purple-500 dark:text-teal-500"
+                                        className={`flex items-center justify-between px-4 py-3 text-base tracking-wide transition-colors ${active
+                                                ? "dark:text-purple-500 dark:bg-purple-500/10"
                                                 : "text-gray-800 hover:bg-gray-50 active:bg-gray-100 dark:text-gray-100 dark:hover:bg-neutral-900 dark:active:bg-neutral-800"
                                             }`}
                                     >
                                         <span className="font-medium">{label}</span>
                                         <span
                                             className={`h-5 w-[3px] rounded-full transition ${active
-                                                    ? "bg-purple-500 dark:bg-teal-500"
+                                                    ? "bg-purple-500 dark:bg-purple-500"
                                                     : "bg-transparent"
                                                 }`}
                                         />

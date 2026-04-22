@@ -36,10 +36,10 @@ export default function ProjectCard({
                     sizes="(min-width: 768px) 40vw, 100vw"
                 />
             </div>
-            <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-between gap-2">
-                <div className="flex min-w-0 flex-col">
+            <div className="flex gap-2 min-h-0 min-w-0 flex-1 flex-col justify-between">
+                <div className="flex flex-col gap-2 min-w-0">
                     {project_type && (
-                        <div className="mb-1 flex items-center">
+                        <div className="flex items-center">
                             <span className="rounded-full bg-blue-500/50 px-2 py-1 text-xs text-blue-300">
                                 <span className="mr-2 inline-block h-2 w-2 rounded-full bg-blue-300" />
                                 {project_type}
@@ -49,12 +49,12 @@ export default function ProjectCard({
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-200">
                         {name}
                     </h2>
-                    <ul className="mt-2 flex flex-wrap gap-2">
+                    <ul className="flex flex-wrap gap-2">
                         {technologies.map((technology) => (
                             <TechTag key={technology} name={technology} />
                         ))}
                     </ul>
-                    <p className="mt-2 text-md dark:text-neutral-200">
+                    <p className="text-md dark:text-neutral-200">
                         {short_description}
                     </p>
                 </div>

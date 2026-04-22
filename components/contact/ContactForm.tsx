@@ -77,58 +77,65 @@ export default function ContactForm() {
     }
 
     return (
-        <form
-            className="px-1 mx-auto w-full max-w-md"
-            onSubmit={handleSubmit}
-        >
-            <div className="flex flex-col mt-6 gap-4 w-full">
-                <input
-                    className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    autoComplete="name"
-                    disabled={submitState.status === "loading"}
-                />
-                <input
-                    className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    autoComplete="email"
-                    disabled={submitState.status === "loading"}
-                />
-                <textarea
-                    className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 min-h-[120px] focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
-                    name="message"
-                    placeholder="Message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                    disabled={submitState.status === "loading"}
-                />
-            </div>
-            <div className="mt-4">
-            <Button type="submit" disabled={submitState.status === "loading"} variant="outline">
-                {submitState.status === "loading" ? "Sending…" : "Submit"}
-            </Button>
-            </div>
-            {submitState.status === "success" ? (
-                <p className="text-sm text-teal-600 dark:text-teal-400">
-                    Message sent. Thank you!
-                </p>
-            ) : null}
-            {submitState.status === "error" ? (
-                <p className="text-sm text-red-600 dark:text-red-400" role="alert">
-                    {submitState.message}
-                </p>
-            ) : null}
-        </form>
+        <section className="mt-8 mx-auto w-full max-w-md">
+            <p className="text-gray-700 dark:text-gray-300">
+                If you have any questions or want to work together,
+                <br />
+                feel free to contact me or just shoot me an email at <a className="text-teal-400 underline" href="mailto:fabiancava22@gmail.com">fabiancava22@gmail.com</a>.
+            </p>
+            <form
+                className="mt-2  "
+                onSubmit={handleSubmit}
+            >
+                <div className="flex flex-col gap-4 w-full">
+                    <input
+                        className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        autoComplete="name"
+                        disabled={submitState.status === "loading"}
+                    />
+                    <input
+                        className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        autoComplete="email"
+                        disabled={submitState.status === "loading"}
+                    />
+                    <textarea
+                        className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 min-h-[120px] focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
+                        name="message"
+                        placeholder="Message"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        required
+                        disabled={submitState.status === "loading"}
+                    />
+                </div>
+                <div className="mt-4">
+                    <Button type="submit" disabled={submitState.status === "loading"} variant="main">
+                        {submitState.status === "loading" ? "Sending…" : "Submit"}
+                    </Button>
+                </div>
+                {submitState.status === "success" ? (
+                    <p className="text-sm text-teal-600 dark:text-teal-400">
+                        Message sent. Thank you!
+                    </p>
+                ) : null}
+                {submitState.status === "error" ? (
+                    <p className="text-sm text-red-600 dark:text-red-400" role="alert">
+                        {submitState.message}
+                    </p>
+                ) : null}
+            </form>
+        </section>
     );
 }

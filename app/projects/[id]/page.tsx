@@ -76,7 +76,7 @@ export default function ProjectPage() {
         <>
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:items-start mt-8">
                 <div className="flex min-w-0 flex-col">
-                    <h1 className=" font-[family-name:var(--font-sekuya)] text-2xl font-light tracking-tight text-gray-900 dark:text-teal-500/90 md:text-3xl mt-1 mb-1">
+                    <h1 className=" font-[family-name:var(--font-sekuya)] text-3xl font-semibold tracking-wider text-gray-900 dark:text-teal-500 md:text-4xl">
                         {data.title}
                     </h1>
                     <hr className="border-gray-200 dark:border-purple-600/20 mt-4 mb-4" />
@@ -123,7 +123,7 @@ export default function ProjectPage() {
                                 {sortedHighlights.map((item) => (
                                     <li
                                         key={item.id}
-                                        className="flex items-start gap-3 text-lg dark:border-teal-500/20 dark:bg-transparent dark:text-gray-300"
+                                        className="flex items-start gap-3 text-base md:text-lg dark:border-teal-500/20 dark:bg-transparent dark:text-gray-300"
                                     >
                                         <span className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-purple-500 shadow-md shadow-purple-500/50 dark:bg-teal-400 dark:shadow-teal-400/50" />
                                         <span className="leading-relaxed text-gray-700 dark:text-gray-300">{item.highlight}</span>

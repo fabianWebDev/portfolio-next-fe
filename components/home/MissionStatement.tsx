@@ -3,7 +3,7 @@ export default function MissionStatement() {
     return (
         <>
             <section className="mt-10">
-                <h2 className="font-[family-name:var(--font-sekuya)] text-3xl font-semibold dark:text-teal-500/90 tracking-widest">
+                <h2 className="font-[family-name:var(--font-sekuya)] text-3xl font-semibold dark:text-teal-500/90 tracking-widest text-shadow-2xs dark:text-shadow-purple-600">
                     My Mission
                 </h2>
                 <div className="mt-4 rounded-lg dark:bg-purple-600/10 py-10 hover:bg-purple-600/20 transition-all duration-300 hover:cursor-none">

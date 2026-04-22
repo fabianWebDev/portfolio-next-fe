@@ -23,7 +23,7 @@ export default function Navbar() {
 
     return (
         <>
-            <header className="flex items-center justify-between gap-6 border-b-2 py-2 dark:border-purple-600 dark:bg-transparent mt-2">
+            <header className="flex items-center justify-between gap-6 py-2 dark:bg-transparent mt-2">
                 <div className="flex min-w-0 flex-1 items-center gap-3 md:gap-6">
                     <button
                         type="button"
@@ -64,7 +64,7 @@ export default function Navbar() {
                     <Link
                         href="/"
                         className="text-lg font-bold text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-widest
-                        dark:hover:text-teal-500 hover:scale-105 transition-all duration-300"
+                        dark:hover:text-teal-500 hover:scale-105 transition-all duration-300 text-shadow-2xs dark:text-shadow-purple-600"
                     >
                         WizOfCode
                     </Link>
@@ -137,6 +137,7 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
+            <hr className="border-b-1 dark:border-purple-600 shadow-sm dark:shadow-indigo-500" />
         </>
     );
 }

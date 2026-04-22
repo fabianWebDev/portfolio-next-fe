@@ -26,7 +26,7 @@ export default function ProjectCard({
 
     return (
         <Link href={`/projects/${id}`}>
-        <article className="flex h-full flex-col gap-4 rounded-sm border-2 border-gray-200 bg-gray-50 p-2 md:p-4 dark:border-purple-600/20 dark:bg-transparent md:p-5 dark:hover:bg-purple-600/10 dark:hover:border-purple-500 transition-all duration-300 dark:hover:scale-101">
+        <article className="flex h-full flex-col gap-4 rounded-sm border-2 border-gray-200 bg-gray-50 p-2 md:p-4 dark:border-purple-900/20 dark:bg-transparent md:p-5 dark:hover:bg-purple-600/10 dark:hover:border-purple-500 transition-all duration-300 dark:hover:scale-101">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xs bg-gray-200 dark:bg-neutral-800">
                 <Image
                     src={image}

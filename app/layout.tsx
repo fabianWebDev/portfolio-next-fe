@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Sekuya } from "next/font/google";
+import { Inter, Sekuya} from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import Navbar from "@/components/Navbar";

@@ -123,7 +123,7 @@ export default function Wizard() {
     const current = words[index];
 
     return (
-        <section className="w-full md:w-1/2 shadow-xl/40 dark:inset-shadow-purple-500/40 justify-center items-center mx-auto rounded-md border-2 border-purple-600 bg-white p-4 text-sm text-gray-900 dark:border-purple-600 dark:bg-transparent dark:text-gray-100 tracking-wider dark:shadow-indigo-500/30">
+        <section className="w-full md:w-1/2 shadow-xl/40 dark:inset-shadow-purple-500/40 justify-center items-center mx-auto rounded-md border-2 p-4 text-sm text-gray-900 dark:border-purple-500 dark:bg-purple-600/10 dark:text-gray-100 tracking-wider dark:shadow-indigo-500/30">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <TypeAnimation
                     wrapper="h2"
@@ -137,7 +137,7 @@ export default function Wizard() {
                     noun
                 </span>
                 <span
-                    className="text-sm font-medium text-teal-700 dark:text-violet-400/90"
+                    className="text-sm font-medium text-teal-700 dark:text-violet-500"
                     aria-label={`Language: ${current.language}`}
                 >
                     · {current.language}
@@ -186,7 +186,7 @@ export default function Wizard() {
             <ul className="mt-2 flex flex-wrap gap-2 text-sm">
                 {current.synonyms.map((syn) => (
                     <li key={syn}>
-                        <span className="rounded-sm bg-blue-50 px-2 py-0.5 font-semibold text-blue-700 dark:bg-violet-600/80 dark:text-violet-200">
+                        <span className="rounded-sm px-2 py-0.5 font-semibold dark:bg-violet-600/80 dark:text-violet-200">
                             {syn}
                         </span>
                     </li>

@@ -3,8 +3,15 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Button from "@/components/Button";
+import TechTag from "@/components/projects/TechTag";
 import ZoomableLightbox from "@/components/projects/ZoomableLightbox";
 import { useRouter, useParams } from "next/navigation";
+
+type ProjectHighlight = {
+    id: number;
+    highlight: string;
+    order: number;
+};
 
 type ProjectDetail = {
     title: string;
@@ -15,10 +22,9 @@ type ProjectDetail = {
     project_url: string;
     github_url: string | null;
     project_type: string;
-
+    highlights?: ProjectHighlight[];
 };
 
-/** First block separated by a blank line; otherwise the whole trimmed string. */
 function getFirstParagraph(text: string): string {
     const t = text.trim();
     if (!t) return "";
@@ -32,6 +38,7 @@ export default function ProjectPage() {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [descriptionExpanded, setDescriptionExpanded] = useState(false);
     const router = useRouter();
+
 
     useEffect(() => {
         if (!id) return;
@@ -47,13 +54,15 @@ export default function ProjectPage() {
             </>
         );
     }
-
     const fullDescription = data.full_description?.trim() ?? "";
     const shortDescription = data.short_description?.trim() ?? "";
     const firstParagraphOfFull = getFirstParagraph(fullDescription);
     const hasExpandableDescription =
         fullDescription.length > 0 &&
         fullDescription !== firstParagraphOfFull;
+    const sortedHighlights = [...(data.highlights ?? [])].sort(
+        (a, b) => a.order - b.order
+    );
 
     const browserBarHost = (() => {
         try {
@@ -67,21 +76,12 @@ export default function ProjectPage() {
         <>
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:items-start mt-8">
                 <div className="flex min-w-0 flex-col">
-                    <h1 className=" font-[family-name:var(--font-sekuya)] text-2xl text-center font-light tracking-tight text-gray-900 dark:text-teal-500/90 md:text-3xl mt-1 mb-1">
+                    <h1 className=" font-[family-name:var(--font-sekuya)] text-2xl font-light tracking-tight text-gray-900 dark:text-teal-500/90 md:text-3xl mt-1 mb-1">
                         {data.title}
                     </h1>
-                    {data.project_type && (
-                        <div className="flex items-center mb-1">
-                            <span className="rounded-full bg-blue-500/50 text-blue-300 text-xs px-2 py-1">
-                                <span className="w-2 h-2 rounded-full bg-blue-300 inline-block mr-2">
-                                </span>
-                                {data.project_type}
-                            </span>
-                        </div>
-                    )}
+                    <hr className="border-gray-200 dark:border-purple-600/20 mt-4 mb-4" />
 
-
-                    <div className="rounded-lg bg-transparent text-gray-700 dark:border-gray-800 dark:bg-transparent dark:text-gray-100">
+                    {/* <div className="rounded-lg bg-transparent text-gray-700 dark:border-gray-800 dark:bg-transparent dark:text-gray-100">
                         {hasExpandableDescription ? (
                             <div className="flex flex-col ">
                                 <div
@@ -112,21 +112,41 @@ export default function ProjectPage() {
                                 {fullDescription || shortDescription}
                             </p>
                         )}
-                    </div>
+                    </div> */}
 
+                    {sortedHighlights.length > 0 && (
+                        <section className="mt-2">
+                            <h3 className="text-lg font-semibold tracking-wide dark:text-teal-500">
+                                Key Features
+                            </h3>
+                            <ul className="mt-2 space-y-2">
+                                {sortedHighlights.map((item) => (
+                                    <li
+                                        key={item.id}
+                                        className="flex items-start gap-3 text-lg dark:border-teal-500/20 dark:bg-transparent dark:text-gray-300"
+                                    >
+                                        <span className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-purple-500 shadow-md shadow-purple-500/50 dark:bg-teal-400 dark:shadow-teal-400/50" />
+                                        <span className="leading-relaxed text-gray-700 dark:text-gray-300">{item.highlight}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    )}
                     <div>
-                        <ul className="mt-2 flex flex-wrap gap-2">
+                        <ul className="flex flex-wrap gap-2 mt-3">
                             {data.tech_list.map((technology) => (
-                                <li key={technology}>
-                                    <span className="inline-block rounded-full bg-neutral-200 px-3 py-1 text-xs text-neutral-800 dark:bg-neutral-700 dark:text-neutral-300">
-                                        {technology}
-                                    </span>
-                                </li>
+                                <TechTag key={technology} name={technology} />
                             ))}
                         </ul>
                     </div>
-                    <div className="flex flex-col gap-2 mt-3">
+                    <div className="flex flex-col gap-2 mt-4">
                         <div className="flex flex-wrap gap-2 shrink-0">
+                            <Button
+                                onClick={() => router.push(data.project_url)}
+                                variant="main"
+                            >
+                                View website
+                            </Button>
                             {data.github_url ? (
                                 <Button
                                     onClick={() => router.push(data.github_url || "")}
@@ -135,13 +155,6 @@ export default function ProjectPage() {
                                     GitHub
                                 </Button>
                             ) : null}
-
-                            <Button
-                                onClick={() => router.push(data.project_url)}
-                                variant="ghost"
-                            >
-                                View website
-                            </Button>
                         </div>
                     </div>
                 </div>

@@ -63,18 +63,3 @@ body {
     display: none;
   }
 }
-
-/* Tall screenshot: translateY needs real thumb height — cqh in @keyframes is unreliable */
-@keyframes pan-y-scroll {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(min(0px, calc(-100% + var(--thumb-h, 11rem))));
-  }
-}
-
-.animate-pan-y-scroll {
-  animation: pan-y-scroll 10s ease-in-out infinite alternate;
-}

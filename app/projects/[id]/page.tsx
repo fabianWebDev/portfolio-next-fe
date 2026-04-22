@@ -79,7 +79,7 @@ export default function ProjectPage() {
                     <h1 className=" font-[family-name:var(--font-sekuya)] text-3xl font-semibold tracking-wider text-gray-900 dark:text-teal-500 md:text-4xl">
                         {data.title}
                     </h1>
-                    <hr className="border-gray-200 dark:border-purple-600/20 mt-4 mb-4" />
+                    <hr className="dark:border-purple-600/20 mt-4 mb-4 shadow-sm/40 dark:shadow-purple-600/90" />
 
                     {/* <div className="rounded-lg bg-transparent text-gray-700 dark:border-gray-800 dark:bg-transparent dark:text-gray-100">
                         {hasExpandableDescription ? (

@@ -81,15 +81,15 @@ export default function ContactForm() {
             <p className="text-gray-700 dark:text-gray-300">
                 If you have any questions or want to work together,
                 <br />
-                feel free to contact me or just shoot me an email at <a className="text-teal-400 underline" href="mailto:fabiancava22@gmail.com">fabiancava22@gmail.com</a>.
+                feel free to contact me or just shoot me an email at <a className="text-teal-400 underline hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300" href="mailto:fabiancava22@gmail.com">fabiancava22@gmail.com</a>.
             </p>
             <form
-                className="mt-2  "
+                className="mt-4"
                 onSubmit={handleSubmit}
             >
                 <div className="flex flex-col gap-4 w-full">
                     <input
-                        className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
+                        className="border-2 border-gray-200 dark:border-purple-800/20 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-purple-500 dark:focus:ring-purple-500"
                         type="text"
                         name="name"
                         placeholder="Name"
@@ -100,7 +100,7 @@ export default function ContactForm() {
                         disabled={submitState.status === "loading"}
                     />
                     <input
-                        className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
+                        className="border-2 border-gray-200 dark:border-purple-800/20 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-purple-500 dark:focus:ring-purple-500"
                         type="email"
                         name="email"
                         placeholder="Email"
@@ -111,7 +111,7 @@ export default function ContactForm() {
                         disabled={submitState.status === "loading"}
                     />
                     <textarea
-                        className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 min-h-[120px] focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
+                        className="border-2 border-gray-200 dark:border-purple-800/20 rounded-md py-2 px-4 min-h-[120px] focus:outline-none focus:ring-1 focus:ring-purple-500 dark:focus:ring-purple-500"
                         name="message"
                         placeholder="Message"
                         value={message}

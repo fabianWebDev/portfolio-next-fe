@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/app/providers";
 import Navbar from "@/components/Navbar";
 import Container from "@/components/layout/Container";
+import Footer from "@/components/footer/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,11 +36,12 @@ export default function RootLayout({
       className={`${inter.variable} ${sekuya.variable}`}
       suppressHydrationWarning
     >
-      <body className="antialiased" suppressHydrationWarning>
+      <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
         <Providers>
           <Container>
             <Navbar />
-            <main>{children}</main>
+            <main className="flex-1">{children}</main>
+            <Footer />
           </Container>
         </Providers>
       </body>

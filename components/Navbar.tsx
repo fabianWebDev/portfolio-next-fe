@@ -23,7 +23,7 @@ export default function Navbar() {
 
     return (
         <>
-            <header className="flex items-center justify-between gap-6 border-b-2 border-gray-200 bg-white py-2 dark:border-purple-600 dark:bg-transparent mt-2">
+            <header className="flex items-center justify-between gap-6 border-b-2 py-2 dark:border-purple-600 dark:bg-transparent mt-2">
                 <div className="flex min-w-0 flex-1 items-center gap-3 md:gap-6">
                     <button
                         type="button"
@@ -82,10 +82,11 @@ export default function Navbar() {
                                             href={href}
                                             aria-current={active ? "page" : undefined}
                                             className={`
-                                                relative block rounded-md px-3 py-2 text-md outline-none transition-colors
+                                                relative block rounded-sm px-3 py-2 text-lg outline-none transition-colors
                                                 focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-gray-200 font-medium
+                                                dark:hover:bg-purple-600/10
                                                 ${active
-                                                    ? "text-purple-500 dark:text-teal-500/90"
+                                                    ? "dark:text-purple-500 dark:bg-purple-600/10"
                                                     : "text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-neutral-800"
                                                 }
                                             `}

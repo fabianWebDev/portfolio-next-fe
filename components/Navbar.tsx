@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { navLinks } from "@/components/nav-links";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         if (!open) return;
@@ -17,22 +19,11 @@ export default function Navbar() {
         return () => window.removeEventListener("keydown", onKey);
     }, [open]);
 
-    useEffect(() => {
-        document.body.style.overflow = open ? "hidden" : "";
-        return () => {
-            document.body.style.overflow = "";
-        };
-    }, [open]);
-
-    const linkClass =
-        "rounded-md px-3 py-2 text-lg font-bold text-gray-900 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-gray-400 dark:text-gray-100 dark:hover:bg-neutral-800 dark:focus-visible:ring-gray-500";
-
-    const desktopLinkClass =
-        "rounded-md px-3 py-2 text-lg text-gray-900 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-gray-400 dark:text-gray-100 dark:hover:bg-neutral-800 dark:focus-visible:ring-gray-500";
+    const isLinkActive = (href: string) => pathname === href;
 
     return (
         <>
-            <header className="flex items-center justify-between gap-6 border-b-2 border-gray-200 bg-white py-2 dark:border-purple-600 dark:bg-transparent mb-6">
+            <header className="flex items-center justify-between gap-6 border-b-2 border-gray-200 bg-white py-2 dark:border-purple-600 dark:bg-transparent mt-2">
                 <div className="flex min-w-0 flex-1 items-center gap-3 md:gap-6">
                     <button
                         type="button"
@@ -44,96 +35,106 @@ export default function Navbar() {
                     >
                         {open ? (
                             <svg
-                                className="h-6 w-6"
+                                className="h-12 w-12"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
                                 aria-hidden
                             >
                                 <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
                                     strokeWidth={2}
                                     d="M6 18L18 6M6 6l12 12"
                                 />
                             </svg>
                         ) : (
                             <svg
-                                className="h-6 w-6"
+                                className="h-12 w-12"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
                                 aria-hidden
                             >
                                 <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
                                     strokeWidth={2}
                                     d="M4 6h16M4 12h16M4 18h16"
                                 />
                             </svg>
                         )}
                     </button>
-                    {/* <Link
+                    <Link
                         href="/"
-                        className="truncate text-lg font-bold tracking-tight text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-widest"
+                        className="text-lg font-bold text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-widest"
                     >
                         WizOfCode
-                    </Link> */}
+                    </Link>
                     <nav
-                        className="hidden min-w-0 flex-1 items-center justify-center md:flex"
+                        className="hidden min-w-0 flex-1 items-center justify-end md:flex"
                         aria-label="Main"
                     >
                         <ul className="flex flex-wrap items-center justify-center gap-1">
-                            {navLinks.map(({ href, label }) => (
-                                <li key={href}>
-                                    <Link href={href} className={desktopLinkClass}>
-                                        {label}
-                                    </Link>
-                                </li>
-                            ))}
+                            {navLinks.map(({ href, label }) => {
+                                const active = isLinkActive(href);
+
+                                return (
+                                    <li key={href}>
+                                        <Link
+                                            href={href}
+                                            aria-current={active ? "page" : undefined}
+                                            className={`
+                                                relative block rounded-md px-3 py-2 text-md outline-none transition-colors
+                                                focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-gray-200 font-medium
+                                                ${active
+                                                    ? "text-purple-500 dark:text-teal-500/90"
+                                                    : "text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-neutral-800"
+                                                }
+                                            `}
+                                        >
+                                            {label}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </nav>
                 </div>
                 {/* <ThemeToggle /> */}
             </header>
 
-            {open && (
-                <div
-                    className="fixed inset-x-0 bottom-0 top-14 z-40 md:hidden"
-                    role="dialog"
-                    aria-modal="true"
-                    aria-labelledby="mobile-nav-title"
-                >
-                    <button
-                        type="button"
-                        className="absolute inset-0 bg-black/50"
-                        aria-label="Cerrar menú"
-                        onClick={() => setOpen(false)}
-                    />
-                    <nav
-                        id="mobile-navigation"
-                        className="absolute inset-y-0 left-0 flex w-[min(18rem,85vw)] flex-col border-r border-gray-200 bg-white p-6 shadow-xl dark:border-gray-800 dark:bg-neutral-950"
-                    >
-                        <p id="mobile-nav-title" className="sr-only">
-                            Navegación principal
-                        </p>
-                        <ul className="flex flex-col gap-1">
-                            {navLinks.map(({ href, label }) => (
-                                <li key={href}>
+            <div
+                id="mobile-navigation"
+                className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-200 ease-out ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+            >
+                <div className="mt-4">
+                    <div className="border-b border-t border-teal-500/20 bg-white dark:border-teal-500/20 dark:bg-transparent">
+                        <div className="flex flex-col divide-y divide-gray-100 dark:divide-teal-500/20">
+                            {navLinks.map(({ href, label }) => {
+                                const active = isLinkActive(href);
+
+                                return (
                                     <Link
+                                        key={href}
                                         href={href}
-                                        className={linkClass}
                                         onClick={() => setOpen(false)}
+                                        className={`flex items-center justify-between px-4 py-3 text-sm tracking-wide transition-colors ${active
+                                                ? "text-purple-500 dark:text-teal-500"
+                                                : "text-gray-800 hover:bg-gray-50 active:bg-gray-100 dark:text-gray-100 dark:hover:bg-neutral-900 dark:active:bg-neutral-800"
+                                            }`}
                                     >
-                                        {label}
+                                        <span className="font-medium">{label}</span>
+                                        <span
+                                            className={`h-5 w-[3px] rounded-full transition ${active
+                                                    ? "bg-purple-500 dark:bg-teal-500"
+                                                    : "bg-transparent"
+                                                }`}
+                                        />
                                     </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
-            )}
+            </div>
         </>
     );
 }

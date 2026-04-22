@@ -123,7 +123,7 @@ export default function Wizard() {
     const current = words[index];
 
     return (
-        <section className="w-full shadow-xl/40 dark:inset-shadow-purple-500/40 justify-center items-center inline-block mx-auto rounded-md border-2 border-purple-600 bg-white p-4 text-sm text-gray-900 dark:border-purple-600 dark:bg-violet-600/20 dark:text-gray-100 tracking-wider dark:shadow-indigo-500/30">
+        <section className="w-full md:w-1/2 shadow-xl/40 dark:inset-shadow-purple-500/40 justify-center items-center mx-auto rounded-md border-2 border-purple-600 bg-white p-4 text-sm text-gray-900 dark:border-purple-600 dark:bg-transparent dark:text-gray-100 tracking-wider dark:shadow-indigo-500/30">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <TypeAnimation
                     wrapper="h2"

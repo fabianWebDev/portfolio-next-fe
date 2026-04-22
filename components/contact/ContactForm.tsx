@@ -78,10 +78,10 @@ export default function ContactForm() {
 
     return (
         <form
-            className="px-1"
+            className="px-1 mx-auto w-full max-w-md"
             onSubmit={handleSubmit}
         >
-            <div className="flex flex-col mt-6 gap-4 w-full sm:w-3/4 md:w-1/4">
+            <div className="flex flex-col mt-6 gap-4 w-full">
                 <input
                     className="border border-gray-200 dark:border-gray-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-teal-400 dark:focus:ring-teal-400"
                     type="text"
@@ -115,7 +115,7 @@ export default function ContactForm() {
                 />
             </div>
             <div className="mt-4">
-            <Button type="submit" disabled={submitState.status === "loading"} variant="default">
+            <Button type="submit" disabled={submitState.status === "loading"} variant="outline">
                 {submitState.status === "loading" ? "Sending…" : "Submit"}
             </Button>
             </div>

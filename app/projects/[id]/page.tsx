@@ -15,7 +15,7 @@ type ProjectDetail = {
     project_url: string;
     github_url: string | null;
     project_type: string;
-    
+
 };
 
 /** First block separated by a blank line; otherwise the whole trimmed string. */
@@ -35,7 +35,7 @@ export default function ProjectPage() {
 
     useEffect(() => {
         if (!id) return;
-        fetch(`http://127.0.0.1:8000/api/projects/${id}`)
+        fetch(`https://portfolio-be-twdt.onrender.com/api/projects/${id}`)
             .then((res) => res.json())
             .then(setData);
     }, [id]);
@@ -65,8 +65,11 @@ export default function ProjectPage() {
 
     return (
         <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-start">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:items-start mt-8">
                 <div className="flex min-w-0 flex-col">
+                    <h1 className=" font-[family-name:var(--font-sekuya)] text-2xl text-center font-light tracking-tight text-gray-900 dark:text-teal-500/90 md:text-3xl mt-1 mb-1">
+                        {data.title}
+                    </h1>
                     {data.project_type && (
                         <div className="flex items-center mb-1">
                             <span className="rounded-full bg-blue-500/50 text-blue-300 text-xs px-2 py-1">
@@ -76,11 +79,9 @@ export default function ProjectPage() {
                             </span>
                         </div>
                     )}
-                    <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 md:text-4xl mt-1 mb-1">
-                        {data.title}
-                    </h1>
 
-                    <div className="rounded-lg bg-background text-gray-700 dark:border-gray-800 dark:bg-background dark:text-gray-100">
+
+                    <div className="rounded-lg bg-transparent text-gray-700 dark:border-gray-800 dark:bg-transparent dark:text-gray-100">
                         {hasExpandableDescription ? (
                             <div className="flex flex-col ">
                                 <div

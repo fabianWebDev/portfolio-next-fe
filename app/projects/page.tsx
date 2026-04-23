@@ -24,7 +24,7 @@ export default async function ProjectsPage() {
 
     return (
         <>
-            <h1 className="font-[family-name:var(--font-sekuya)] shrink-0 mb-8 mt-8 text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-teal-500/90 text-center text-shadow-md dark:text-shadow-purple-600 text-shadow-md dark:text-shadow-purple-600">
+            <h1 className="font-[family-name:var(--font-sekuya)] shrink-0 mb-8 mt-8 text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-teal-500/90 text-center text-shadow-md dark:text-shadow-purple-600">
                 Projects
             </h1>
             {data === null ? (

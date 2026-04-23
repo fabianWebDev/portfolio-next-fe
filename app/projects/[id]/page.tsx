@@ -76,7 +76,7 @@ export default function ProjectPage() {
         <>
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:items-start mt-8">
                 <div className="flex min-w-0 flex-col">
-                    <h1 className=" font-[family-name:var(--font-sekuya)] text-3xl font-semibold tracking-wider text-gray-900 dark:text-teal-500 md:text-4xl text-shadow-2xs dark:text-shadow-purple-600">
+                    <h1 className="font-[family-name:var(--font-sekuya)] text-2xl sm:text-3xl font-semibold tracking-wider text-gray-900 dark:text-teal-500/90 md:text-4xl text-shadow-2xs dark:text-shadow-purple-600">
                         {data.title}
                     </h1>
                     <hr className="dark:border-purple-900/20 mt-4 mb-4" />

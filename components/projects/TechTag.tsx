@@ -31,7 +31,7 @@ export default function TechTag({ name }: TechTagProps) {
     const Icon = tech?.icon;
 
     return (
-        <li className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-bold dark:bg-violet-800/90 dark:text-neutral-300">
+        <li className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold tracking-wide dark:bg-violet-800/40 dark:text-neutral-200">
             {Icon ? <Icon size={18} color={tech.color} aria-hidden="true" /> : null}
             <span>{name}</span>
         </li>

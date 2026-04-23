@@ -27,7 +27,7 @@ export default function Navbar() {
                 <div className="flex min-w-0 flex-1 items-center gap-3 md:gap-6">
                     <button
                         type="button"
-                        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-gray-900 outline-none hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-gray-400 md:hidden dark:text-gray-100 dark:hover:bg-neutral-800"
+                        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md outline-none hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-purple-800/20 md:hidden dark:text-purple-600"
                         aria-expanded={open}
                         aria-controls="mobile-navigation"
                         aria-label={open ? "Cerrar menú" : "Abrir menú"}
@@ -35,7 +35,7 @@ export default function Navbar() {
                     >
                         {open ? (
                             <svg
-                                className="h-12 w-12"
+                                className="h-10 w-10"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -63,7 +63,7 @@ export default function Navbar() {
                     </button>
                     <Link
                         href="/"
-                        className="text-lg font-bold text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-widest hover:scale-105 transition-all duration-300 text-shadow-2xs dark:text-shadow-purple-600"
+                        className="text-lg font-bold text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-widest hover:scale-105 transition-all duration-300 text-shadow-md dark:text-shadow-purple-600"
                     >
                         WizOfCode
                     </Link>
@@ -107,11 +107,11 @@ export default function Navbar() {
                     }`}
             >
                 <div className="">
-                    <div className="border-b-2 border-teal-500/20 bg-white dark:border-purple-500 dark:bg-transparent">
+                    <div className="dark:bg-transparent">
                         <div className="flex flex-col divide-y dark:divide-purple-500">
                             {navLinks.map(({ href, label }) => {
                                 const active = isLinkActive(href);
-
+                                
                                 return (
                                     <Link
                                         key={href}
@@ -119,7 +119,7 @@ export default function Navbar() {
                                         onClick={() => setOpen(false)}
                                         className={`flex items-center justify-between px-4 py-3 text-base tracking-wide transition-colors ${active
                                                 ? "dark:text-purple-500 dark:bg-purple-500/10"
-                                                : "text-gray-800 hover:bg-gray-50 active:bg-gray-100 dark:text-gray-100 dark:hover:bg-neutral-900 dark:active:bg-neutral-800"
+                                                : "dark:text-gray-100 dark:hover:bg-transparent"
                                             }`}
                                     >
                                         <span className="font-medium">{label}</span>

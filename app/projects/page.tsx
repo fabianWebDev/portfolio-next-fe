@@ -24,7 +24,7 @@ export default async function ProjectsPage() {
 
     return (
         <>
-            <h1 className="font-[family-name:var(--font-sekuya)] shrink-0 mb-8 mt-8 text-4xl font-semibold text-gray-900 dark:text-teal-500/90 text-center text-shadow-md dark:text-shadow-purple-600 text-shadow-md dark:text-shadow-purple-600">
+            <h1 className="font-[family-name:var(--font-sekuya)] shrink-0 mb-8 mt-8 text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-teal-500/90 text-center text-shadow-md dark:text-shadow-purple-600 text-shadow-md dark:text-shadow-purple-600">
                 Projects
             </h1>
             {data === null ? (
@@ -37,7 +37,7 @@ export default async function ProjectsPage() {
                     No projects to show yet.
                 </p>
             ) : (
-                <div className="grid grid-cols-1 gap-4 pb-2 md:pr-2 lg:pr-4 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     {data.map((project: any) => {
                         if (project.is_active) {
                             return (
@@ -59,4 +59,3 @@ export default async function ProjectsPage() {
         </>
     );
 }
-

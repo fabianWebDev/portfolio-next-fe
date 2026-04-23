@@ -14,6 +14,43 @@ type ProjectCardProps = {
     project_type: string;
 };
 
+type ProjectTypeColors = {
+    badge: string;
+    dot: string;
+};
+
+function getProjectTypeColors(projectType: string): ProjectTypeColors {
+    const normalizedType = projectType.toLowerCase();
+
+    if (
+        normalizedType.includes("landing-page")
+    ) {
+        return {
+            badge: "bg-cyan-500/20 text-cyan-300",
+            dot: "bg-cyan-300",
+        };
+    }
+
+    if (normalizedType.includes("institutional")) {
+        return {
+            badge: "bg-lime-500/20 text-lime-300",
+            dot: "bg-lime-300",
+        };
+    }
+
+    if (normalizedType.includes("e-commerce")) {
+        return {
+            badge: "bg-violet-500/20 text-violet-300",
+            dot: "bg-violet-300",
+        };
+    }
+
+    return {
+        badge: "bg-blue-500/20 text-blue-300",
+        dot: "bg-blue-300",
+    };
+}
+
 export default function ProjectCard({
     id,
     name,
@@ -23,6 +60,7 @@ export default function ProjectCard({
     project_type,
 }: ProjectCardProps) {
     const router = useRouter();
+    const projectTypeColors = getProjectTypeColors(project_type);
 
     return (
         <Link href={`/projects/${id}`}>
@@ -40,8 +78,12 @@ export default function ProjectCard({
                 <div className="flex flex-col gap-2 min-w-0">
                     {project_type && (
                         <div className="flex items-center">
-                            <span className="rounded-full bg-blue-500/50 px-2 py-1 text-xs text-blue-300">
-                                <span className="mr-2 inline-block h-2 w-2 rounded-full bg-blue-300" />
+                            <span
+                                className={`rounded-full px-2 py-1 text-xs ${projectTypeColors.badge}`}
+                            >
+                                <span
+                                    className={`mr-2 inline-block h-2 w-2 rounded-full ${projectTypeColors.dot}`}
+                                />
                                 {project_type}
                             </span>
                         </div>

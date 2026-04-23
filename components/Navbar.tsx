@@ -63,8 +63,7 @@ export default function Navbar() {
                     </button>
                     <Link
                         href="/"
-                        className="text-lg font-bold text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-widest
-                        dark:hover:text-teal-500 hover:scale-105 transition-all duration-300 text-shadow-2xs dark:text-shadow-purple-600"
+                        className="text-lg font-bold text-purple-400/90 dark:text-teal-500/90 font-[family-name:var(--font-sekuya)] tracking-widest hover:scale-105 transition-all duration-300 text-shadow-2xs dark:text-shadow-purple-600"
                     >
                         WizOfCode
                     </Link>

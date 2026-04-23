@@ -19,8 +19,9 @@ export default function Description() {
                     I turn ideas into clean, scalable, and user-focused digital products.
                 </p>
             </div>
-            <div className="mt-4">
-                <Button onClick={() => router.push("/projects")} variant="main">View Projects</Button>
+            <div className="mt-4 flex gap-2">
+                <Button onClick={() => router.push("/projects")} variant="main">See my work</Button>
+                <Button onClick={() => router.push("/contact")} variant="outline">Contact me</Button>
             </div>
             <hr className="dark:border-purple-900/20 mt-10" />
         </section>

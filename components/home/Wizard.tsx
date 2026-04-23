@@ -123,30 +123,30 @@ export default function Wizard() {
     const current = words[index];
 
     return (
-        <section className="w-full items-center mx-auto rounded-md border-2 p-4 text-sm md:w-1/2 shadow-xl/20 dark:inset-shadow-sm dark:inset-shadow-indigo-500/80 justify-center dark:border-purple-500 dark:bg-purple-600/10 dark:text-gray-100 tracking-wider dark:shadow-indigo-500/80">
-            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <section className="w-full items-center rounded mx-auto border-3 p-6 lg:w-2/3 shadow-xl/20 dark:inset-shadow-sm dark:inset-shadow-indigo-500/80 justify-center dark:border-purple-500 dark:bg-purple-600/10 dark:text-gray-100 tracking-wider dark:shadow-indigo-500/80">
+            <div className="flex flex-wrap items-baseline gap-x-1 gap-y-1">
                 <TypeAnimation
                     wrapper="h2"
-                    className="inline text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 tracking-wider"
+                    className="inline text-4xl font-semibold tracking-normal dark:text-neutral-200 text-shadow-md dark:text-shadow-neutral-950"
                     sequence={sequence}
                     speed={50}
                     repeat={Infinity}
                     preRenderFirstString
                 />
-                <span className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                <span className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 text-shadow-md dark:text-shadow-neutral-950/40">
                     noun
                 </span>
                 <span
-                    className="text-sm font-medium text-teal-700 dark:text-violet-500"
+                    className="text-base font-semibold dark:text-teal-400 text-shadow-md dark:text-shadow-neutral-950/40"
                     aria-label={`Language: ${current.language}`}
                 >
                     · {current.language}
                 </span>
             </div>
 
-            <div className="mt-1 text-base text-gray-700 dark:text-gray-300">
+            <div className="mt-1 text-base dark:text-gray-400 text-shadow-md dark:text-shadow-neutral-950/40">
                 <span className="font-semibold">{current.syllables}</span>{" "}
-                <span className="text-gray-500 dark:text-gray-400">
+                <span className="dark:text-gray-400 text-shadow-md dark:text-shadow-neutral-950/40">
                     {current.pronunciation}
                 </span>
             </div>
@@ -154,31 +154,31 @@ export default function Wizard() {
             <ol className="mt-3 space-y-2 pl-0 text-base list-none">
                 {current.definitions.map((def, i) => (
                     <li key={i} className="flex gap-2">
-                        <span className="w-5 shrink-0 text-right text-gray-500 dark:text-gray-400">
+                        <span className="w-5 shrink-0 text-right dark:text-gray-400 text-shadow-md dark:text-shadow-neutral-950/40">
                             {i + 1}:
                         </span>
-                        <div>
-                            <div className="flex flex-wrap items-baseline gap-x-1 gap-y-0.5">
-                                {def.tag ? (
-                                    <span className="mr-1 rounded-sm bg-gray-100 px-1 py-0.5 text-[0.65rem] uppercase tracking-wide text-gray-600 dark:bg-neutral-800 dark:text-gray-300">
-                                        {def.tag}
-                                    </span>
-                                ) : null}
-                                <span>{def.meaning}</span>
-                            </div>
+                        <div className="flex min-w-0 flex-1 flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                            {def.tag ? (
+                                <span className="shrink-0 rounded-sm px-2 py-1 text-[0.65rem] uppercase tracking-wide dark:bg-teal-500/20 dark:text-teal-400 shadow-sm/20 dark:shadow-neutral-950">
+                                    {def.tag}
+                                </span>
+                            ) : null}
+                            <span className="min-w-0">{def.meaning}.</span>
                             {def.example ? (
-                                <div className="mt-0.5 pl-1 text-base text-gray-600 italic dark:text-gray-400">
-                                    {def.example}
-                                </div>
+                                <>
+                                    <span className="min-w-0 italic dark:text-gray-400 text-shadow-md     dark:text-shadow-neutral-950/40">
+                                        {def.example}.
+                                    </span>
+                                </>
                             ) : null}
                         </div>
                     </li>
                 ))}
             </ol>
 
-            <div className="mt-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            <div className="mt-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 text-shadow-md dark:text-shadow-neutral-950/40">
                 Synonyms of{" "}
-                <span className="normal-case font-normal text-lg text-gray-700 dark:text-gray-200">
+                <span className="normal-case font-semibold text-lg dark:text-gray-200">
                     {current.word}
                 </span>
             </div>
@@ -186,7 +186,7 @@ export default function Wizard() {
             <ul className="mt-2 flex flex-wrap gap-2 text-sm">
                 {current.synonyms.map((syn) => (
                     <li key={syn}>
-                        <span className="rounded-sm px-2 py-0.5 font-semibold dark:bg-violet-600/80 dark:text-violet-200">
+                        <span className="rounded-sm px-2 py-1 font-semibold dark:bg-teal-500/20 dark:text-teal-400 shadow-sm/20 dark:shadow-neutral-950">
                             {syn}
                         </span>
                     </li>

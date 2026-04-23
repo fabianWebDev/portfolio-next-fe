@@ -103,7 +103,7 @@ export default function ProjectCard({
                 <div className="flex shrink-0">
                     <Button
                         onClick={() => router.push(`/projects/${id}`)}
-                        variant="main"
+                        variant="text"
                     >
                         View project
                     </Button>

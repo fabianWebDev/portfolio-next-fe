@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import TechTag from "@/components/projects/TechTag";
 import ZoomableLightbox from "@/components/projects/ZoomableLightbox";
 import { useRouter, useParams } from "next/navigation";
+import LoadingWidget from "@/components/LoadingWidget";
 
 type ProjectHighlight = {
     id: number;
@@ -50,7 +51,7 @@ export default function ProjectPage() {
     if (!data) {
         return (
             <>
-                <p className="text-gray-600 dark:text-gray-400">Loading project…</p>
+                <LoadingWidget />
             </>
         );
     }

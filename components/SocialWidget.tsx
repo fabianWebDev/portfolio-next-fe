@@ -17,7 +17,7 @@ export default function SocialWidget() {
                 <Link target="_blank" href="https://github.com/fabianWebDev">
                     <FaGithub className="text-5xl text-purple-600 hover:scale-110 transition-all duration-300 border-2 border-purple-600 rounded-full p-2" />
                 </Link>
-                <Link target="_blank" href="https://wa.me/50688849310">
+                <Link target="_blank" href="https://wa.me/50683751695">
                     <FaWhatsapp className="text-5xl text-purple-600 hover:scale-110 transition-all duration-300 border-2 border-purple-600 rounded-full p-2" />
                 </Link>
                 {/* <Link target="_blank" href="https://twitter.com/fabiancampos">

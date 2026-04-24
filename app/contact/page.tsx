@@ -5,14 +5,14 @@ import type { Metadata } from "next";
 const contactDescription = `Get in touch with ${siteName} — project inquiries, collaboration, or questions about software development work.`;
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: contactDescription,
-  openGraph: {
-    title: `Contact | ${siteName}`,
+    title: "Contact",
     description: contactDescription,
-    url: `${getSiteUrl()}/contact`,
-  },
-  alternates: { canonical: `${getSiteUrl()}/contact` },
+    openGraph: {
+        title: `Contact | ${siteName}`,
+        description: contactDescription,
+        url: `${getSiteUrl()}/contact`,
+    },
+    alternates: { canonical: `${getSiteUrl()}/contact` },
 };
 
 export default function ContactPage() {

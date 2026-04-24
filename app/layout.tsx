@@ -5,6 +5,7 @@ import { Providers } from "@/app/providers";
 import Navbar from "@/components/Navbar";
 import Container from "@/components/layout/Container";
 import Footer from "@/components/footer/Footer";
+import { defaultDescription, getSiteUrl, siteName } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,9 +21,33 @@ const sekuya = Sekuya({
   fallback: ["system-ui", "sans-serif"],
 });
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
-  title: "WizOfCode",
-  description: "WizOfCode is a portfolio website for a software engineer",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  description: defaultDescription,
+  applicationName: siteName,
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName,
+    title: siteName,
+    description: defaultDescription,
+    url: siteUrl,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: defaultDescription,
+  },
 };
 
 export default function RootLayout({

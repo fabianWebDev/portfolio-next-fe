@@ -1,8 +1,20 @@
 import ProjectCard from "@/components/projects/ProjectCard";
+import { getApiBase } from "@/lib/api";
+import { getSiteUrl, siteName } from "@/lib/site";
+import type { Metadata } from "next";
 
-const API_BASE =
-    process.env.NEXT_PUBLIC_API_BASE_URL ??
-    "https://portfolio-be-twdt.onrender.com/api";
+export const metadata: Metadata = {
+  title: "Projects",
+  description: `Selected work and case studies from ${siteName} — full-stack and web development projects, tech stack, and live demos.`,
+  openGraph: {
+    title: `Projects | ${siteName}`,
+    description: `Portfolio projects by ${siteName}.`,
+    url: `${getSiteUrl()}/projects`,
+  },
+  alternates: { canonical: `${getSiteUrl()}/projects` },
+};
+
+const API_BASE = getApiBase();
 
 async function fetchProjects() {
     const url = `${API_BASE.replace(/\/$/, "")}/projects/`;

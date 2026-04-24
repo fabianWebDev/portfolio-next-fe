@@ -8,18 +8,15 @@ export default function Description() {
     return (
         <section className="mt-10">
             <hr className="dark:border-purple-900/20 mb-10" />
-            <h2 className="font-[family-name:var(--font-sekuya)] text-2xl sm:text-3xl font-semibold tracking-wider text-gray-900 dark:text-teal-500/90 text-shadow-2xs dark:text-shadow-purple-600">About Me</h2>
-            <div className="text-gray-700 dark:text-gray-300 mt-2">
+            <h2 className="font-[family-name:var(--font-sekuya)] text-2xl sm:text-3xl font-semibold tracking-wider text-gray-900 dark:text-teal-500/90 text-shadow-2xs dark:text-shadow-purple-600 text-center">About Me</h2>
+            <div className="text-gray-700 dark:text-neutral-50 mt-2 sm:mt-4 text-center">
                 <p className="text-base md:text-xl tracking-wide">
-                    Hi, I'm Fabián Campos!
+                    Hi! I'm Fabian,
                     <br />
-                    I'm a full-stack software engineer with 6+ years of experience building web applications with Python, Django, React, and modern frontend tools.
-                </p>
-                <p className="text-base md:text-xl tracking-wide">
-                    I turn ideas into clean, scalable, and user-focused digital products.
+                    I help businesses and creators build digital products from idea to launch — clean, scalable, and user-focused.
                 </p>
             </div>
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex gap-2 justify-center">
                 <Button onClick={() => router.push("/projects")} variant="main">See my work</Button>
                 <Button onClick={() => router.push("/contact")} variant="outline">Contact me</Button>
             </div>

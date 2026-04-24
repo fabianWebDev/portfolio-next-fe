@@ -127,7 +127,7 @@ export default function ProjectPage() {
                                         className="flex items-start gap-3 text-base md:text-lg dark:border-teal-500/20 dark:bg-transparent dark:text-gray-300"
                                     >
                                         <span className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-purple-500 shadow-md shadow-purple-500/50 dark:bg-teal-400 dark:shadow-teal-400/50" />
-                                        <span className="leading-relaxed text-gray-700 dark:text-gray-300">{item.highlight}</span>
+                                        <span className="leading-relaxed text-gray-700 dark:text-neutral-50">{item.highlight}</span>
                                     </li>
                                 ))}
                             </ul>

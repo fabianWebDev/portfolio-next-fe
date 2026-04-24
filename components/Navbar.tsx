@@ -98,7 +98,7 @@ export default function Navbar() {
                         </ul>
                     </nav>
                 </div>
-                {/* <ThemeToggle /> */}
+                {/* <ThemeToggle />  */}
             </header>
 
             <div
@@ -106,27 +106,27 @@ export default function Navbar() {
                 className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                     }`}
             >
-                <div className="">
+                <div className="border-t-2 border-purple-600">
                     <div className="dark:bg-transparent">
                         <div className="flex flex-col divide-y dark:divide-purple-500">
                             {navLinks.map(({ href, label }) => {
                                 const active = isLinkActive(href);
-                                
+
                                 return (
                                     <Link
                                         key={href}
                                         href={href}
                                         onClick={() => setOpen(false)}
                                         className={`flex items-center justify-between px-4 py-3 text-base tracking-wide transition-colors ${active
-                                                ? "dark:text-purple-500 dark:bg-purple-500/10"
-                                                : "dark:text-gray-100 dark:hover:bg-transparent"
+                                            ? "dark:text-purple-500 dark:bg-purple-500/10"
+                                            : "dark:text-gray-100 dark:hover:bg-transparent"
                                             }`}
                                     >
                                         <span className="font-medium">{label}</span>
                                         <span
                                             className={`h-5 w-[3px] rounded-full transition ${active
-                                                    ? "bg-purple-500 dark:bg-purple-500"
-                                                    : "bg-transparent"
+                                                ? "bg-purple-500 dark:bg-purple-500"
+                                                : "bg-transparent"
                                                 }`}
                                         />
                                     </Link>

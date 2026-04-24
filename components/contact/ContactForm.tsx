@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import Button from "@/components/Button";
+import SocialWidget from "@/components/SocialWidget";
 
 const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL ??
@@ -120,9 +121,9 @@ export default function ContactForm() {
                         disabled={submitState.status === "loading"}
                     />
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 flex justify-center">
                     <Button type="submit" disabled={submitState.status === "loading"} variant="main">
-                        {submitState.status === "loading" ? "Sending…" : "Submit"}
+                        {submitState.status === "loading" ? "Sending…" : "Send message"}
                     </Button>
                 </div>
                 {submitState.status === "success" ? (
